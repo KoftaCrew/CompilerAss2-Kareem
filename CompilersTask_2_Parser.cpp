@@ -395,7 +395,7 @@ struct Parser
     TreeNode *ParseNewExpr();
 
     void Match(TokenType expected) const;
-    void Error(const char *msg) const;
+    void Error(const char *message) const;
 };
 
 TreeNode *Parser::ParseProgram()
@@ -412,9 +412,9 @@ TreeNode *Parser::ParseStmtSeq()
         Match(SEMI_COLON);
         TreeNode *siblingTree = ParseStmt();
         if (siblingTree) {
-            TreeNode *t2 = tree;
-            while (t2->sibling) t2 = t2->sibling;
-            t2->sibling = siblingTree;
+            TreeNode *lastSibling = tree;
+            while (lastSibling->sibling) lastSibling = lastSibling->sibling;
+            lastSibling->sibling = siblingTree;
         }
     }
     return tree;
@@ -623,9 +623,9 @@ void Parser::Match(TokenType expected) const
     }
 }
 
-void Parser::Error(const char *msg) const
+void Parser::Error(const char *message) const
 {
-    printf("Error: %s at line %d\n", msg, pci->in_file.cur_line_num);
+    printf("Error: %s at line %d\n", message, pci->in_file.cur_line_num);
     throw exception();
 }
 
