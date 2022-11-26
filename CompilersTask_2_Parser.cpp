@@ -517,7 +517,7 @@ TreeNode *Parser::ParseExpr()
         opTree->node_kind = OPER_NODE;
         opTree->line_num = pci->in_file.cur_line_num;
         opTree->oper = ppi->next_token.type;
-        opTree->expr_data_type = BOOLEAN;
+//        opTree->expr_data_type = BOOLEAN;
         opTree->child[0] = tree;
         Match(ppi->next_token.type);
         opTree->child[1] = ParseMathExpr();
@@ -534,7 +534,7 @@ TreeNode *Parser::ParseMathExpr()
         opTree->node_kind = OPER_NODE;
         opTree->line_num = pci->in_file.cur_line_num;
         opTree->oper = ppi->next_token.type;
-        opTree->expr_data_type = INTEGER;
+//        opTree->expr_data_type = INTEGER;
         opTree->child[0] = tree;
         Match(ppi->next_token.type);
         opTree->child[1] = ParseTerm();
@@ -551,7 +551,7 @@ TreeNode *Parser::ParseTerm()
         opTree->node_kind = OPER_NODE;
         opTree->line_num = pci->in_file.cur_line_num;
         opTree->oper = ppi->next_token.type;
-        opTree->expr_data_type = INTEGER;
+//        opTree->expr_data_type = INTEGER;
         opTree->child[0] = tree;
         Match(ppi->next_token.type);
         opTree->child[1] = ParseFactor();
@@ -569,7 +569,7 @@ TreeNode *Parser::ParseFactor()
         child->node_kind = OPER_NODE;
         child->line_num = pci->in_file.cur_line_num;
         child->oper = ppi->next_token.type;
-        child->expr_data_type = INTEGER;
+//        child->expr_data_type = INTEGER;
         child->child[0] = terminalTree;
         Match(ppi->next_token.type);
         child->child[1] = ParseNewExpr();
@@ -589,7 +589,7 @@ TreeNode *Parser::ParseNewExpr()
             tree->line_num = pci->in_file.cur_line_num;
             tree->id = new char[MAX_TOKEN_LEN];
             Copy(tree->id, ppi->next_token.str);
-            tree->expr_data_type = INTEGER;
+//            tree->expr_data_type = INTEGER;
             Match(ID);
             break;
         case NUM:
@@ -597,7 +597,7 @@ TreeNode *Parser::ParseNewExpr()
             tree->node_kind = NUM_NODE;
             tree->line_num = pci->in_file.cur_line_num;
             tree->num = atoi(ppi->next_token.str);
-            tree->expr_data_type = INTEGER;
+//            tree->expr_data_type = INTEGER;
             Match(NUM);
             break;
         case LEFT_PAREN:
